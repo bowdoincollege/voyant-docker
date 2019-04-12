@@ -4,9 +4,9 @@ Enable running [Voyant Tools](https://github.com/sgsinclair/Voyant) and [Voyant 
 
 The goal is to enable:
 
-    1. (Default) Open for uploads and exploration with transient data. E.g. for classroom use where the data is removed at the end of a session, course, or perhaps never.
+1. (Default) Open for uploads and exploration with transient data. E.g. for classroom use where the data is removed at the end of a session, course, or perhaps never.
 
-    2. With a preconfigured (read-only) set of corpora. E.g. for publication
+2. With a preconfigured (read-only) set of corpora. E.g. for publication
 
 ## Using Custom Voyant Tools or Voyant Server Build
 
