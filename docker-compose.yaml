@@ -1,0 +1,15 @@
+version: '2'
+services:
+  voyant:
+    image: voyant:latest
+    build: .
+    container_name: voyant
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./data:/data
+      - ./server-settings.txt:/usr/src/voyant/server-settings.txt
+
+# volumes:
+#   data:
+  
