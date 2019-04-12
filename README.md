@@ -10,7 +10,7 @@ The goal is to enable:
 
 ## Using Custom Voyant Tools or Voyant Server Build
 
-The default Dockerfile uses the latest pre-built [Voyant Server](https://github.com/sgsinclair/VoyantServer) from the GitHub distribution. It is downloaded at container build time, extracted, and put into place for later execution.
+The default Dockerfile uses the latest pre-built [VoyantServer bundle](https://github.com/sgsinclair/VoyantServer) from the GitHub distribution running under Tomcat with an ngnix font-end proxy (for SSL). The tools are downloaded at container build time, extracted, and put into place for later execution. The `VoyantServer.jar` (which includes the Jetty servlet engine) is *not* used.
 
 I have built versions of the container by simply substituting the `wget` download URL where the Voyant Server archive is downloaded from with a COPY command. As long as the `.zip` file has the right contents, the `VoyantServer.jar` and web application `_app` directories, things should work.
 
@@ -20,15 +20,15 @@ Alternatively, if your _release_ were web-accessible, you could change the URL t
 
 Voyant Tools puts all the uploaded corpora and derivative data into Java (Jetty) temporary directories. This seems a little odd to me when thinking about persisting corpus data across launches. To resolve that, there's a little bit of a dance in the `Dockerfile` to symbolic link the actual data directories needed from the `/data` directory. `/data` is intended to be mounted as a VOLUME in Docker terms and contain your persistent data files (corpora and resources).
 
-## Servlet Container
+## Alternate Servlet Container (Jetty)
 
-The preferred method of running a Voyant Tools server appears to be with the VoyantServer built-in Jetty servlet engine from the Eclipse foundation. The [VoyantServer](https://github.com/sgsinclair/VoyantServer) project implements this and this project encapsulates that process into a docker container.
+The preferred method of running a Voyant Tools server appears to be with the VoyantServer built-in Jetty servlet engine from the Eclipse foundation. The [VoyantServer](https://github.com/sgsinclair/VoyantServer) project implements this method, but it is not used as the default for this project. Look in the `voyant-jetty` subdirectory for an example of that implementation.
 
-Voyant Tools can be run as a web application within the Tomcat container, the `voyant-tomcat` subdirectory contains this alternate container implementation.
+Why Tomcat? The 'hosted version' of [Voyant Tools](http://voyant-tools.org) uses Tomcat and nginx as noted in [this GitHub issue](https://github.com/sgsinclair/VoyantServer/issues/24) about path traversal problems with Jetty. This [issue](https://github.com/sgsinclair/VoyantServer/issues/17) shows their ngnix configuration for SSL. So, given the live, running, hosted version uses this configuration, it seems the most robustly tested option.
 
 ## Tomcat Configuration
 
-The Tomcat (catalina) configuration *ignores the `server-settings.txt` file*. That's because when using tomcat we are running the web application directly and not using the `VoyantServer.jar` wrapper. Thus you need to configure things using `CATALINA_OPTS`. When using `docker-compose.yaml` this looks like:
+The Tomcat (Catalina) configuration *ignores the `server-settings.txt` file*. That's because when using tomcat we are running the web application directly and not using the `VoyantServer.jar` wrapper. Thus you need to configure things using `CATALINA_OPTS`. When using `docker-compose.yaml` this looks like:
 
 ```
     environment:

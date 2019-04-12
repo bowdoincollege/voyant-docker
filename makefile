@@ -37,7 +37,7 @@ build:
 run: container
 
 container:
-	docker-compose up -d
+	docker-compose up 
 
 # Start an already existing container that has been stopped
 start:
@@ -68,7 +68,6 @@ clean-volume:
 # Delete a container (WARNNING)
 clean: stop
 	docker-compose down
-	rm -rf data/jetty*
 
 # Delete a container and it's volumes (DANGER)
 distclean: clean clean-volume

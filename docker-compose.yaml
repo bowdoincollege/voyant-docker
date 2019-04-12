@@ -2,13 +2,15 @@ version: '2'
 services:
   voyant:
     image: voyant:latest
-    build: .
+    build: voyant-local
     container_name: voyant
     ports:
-      - "8888:8888"
+      - "8080:8080"
     volumes:
-      - ./data:/data
-      - ./server-settings.txt:/usr/src/voyant/server-settings.txt
+       - ./data:/usr/local/tomcat/temp
+    #environment:
+    #    CATALINA_OPTS: -Dorg.voyanttools.server.allowinput=false 
+    #    CATALINA_OPTS: -Dorg.voyanttools.server.allowinput=false -Dorg.voyanttools.voyant.openmenu=shakespeare:ShakespearePlays
 
 # volumes:
 #   data:
