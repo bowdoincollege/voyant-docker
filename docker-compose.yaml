@@ -1,8 +1,9 @@
 version: '2'
 services:
   voyant:
-    image: voyant:latest
-    build: voyant-local
+    image: 725535576166.dkr.ecr.us-east-1.amazonaws.com/voyant-example:latest
+    #image: voyant:latest
+    #build: voyant-local
     container_name: voyant
     ports:
       - "8080:8080"

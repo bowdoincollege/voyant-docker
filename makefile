@@ -37,6 +37,7 @@ build:
 run: container
 
 container:
+	$(aws ecr get-login --no-include-email --region us-east-1)
 	docker-compose up 
 
 # Start an already existing container that has been stopped
