@@ -50,3 +50,4 @@ The Tomcat (Catalina) configuration *ignores the `server-settings.txt` file*. Th
 7. Should there just be one 'server' per corpus, and then have a front-end dispatch among them?
 8. What is the purpose of `hasNoAllowInputText (no-allow-input-text)` and `hasCorpusCreatorText (corpus-creator-text)` and where do those files go?
 9. Why does Voyant use 'tmpdir' How does data persist in this situation!? It even overwrites any command line set tmpdir which is where I want the jetty temp files to go. My corpora should be in a persistent location.
+
