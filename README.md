@@ -1,5 +1,7 @@
 # Voyant Tools in Docker
 
+** This repository is no longer used. In fact, it was never used outside of testing. **
+
 Enable running [Voyant Tools](https://github.com/sgsinclair/Voyant) and [Voyant Server](https://github.com/sgsinclair/VoyantServer) in a docker container in a variety of situations useful in an educational setting.
 
 The goal is to enable:
